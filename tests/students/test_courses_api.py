@@ -28,7 +28,8 @@ def student_factory():
 @pytest.mark.django_db
 def test_courses(client, curs_factory):
     curs = curs_factory(_quantity=1)
-    response = client.get('/courses/')
+    id_curs = curs[0].id
+    response = client.get(f'/courses/?id={id_curs}')
     data = response.json()
 
     assert response.status_code == 200
